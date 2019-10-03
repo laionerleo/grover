@@ -10,6 +10,8 @@ $i                                        = '^(en|es|de|it|po)';
 
 $route[$l.'pedidos']                 		= 'Pedidocontroller';
 $route[$l.'inicio']                 		= 'Clientecontroller';
+$route[$l.'login']                 		= 'Logincontroller';
+
 
 
 $route['default_controller']               = 'Welcome';
