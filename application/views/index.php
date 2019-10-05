@@ -36,7 +36,7 @@
 		
 			<!-- Header -->
             <div class="header">
-			<p>hola mundo </p>
+			<p>hola mundo   cruel  </p>
 				<!-- Logo -->
                 <div class="header-left">
                     <a href="index.html" class="logo">
