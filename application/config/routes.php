@@ -8,7 +8,18 @@ $i                                        = '^(en|es|de|it|po)';
 
 /**/
 
-$route[$l.'pedidos']                 		= 'Pedidocontroller';
+
+
+
+$route[$l.'pedidos']                        = 'Pedidocontroller';  // aqui carga el listar 
+$route[$l.'pedidos/(:num)']                 = 'Pedidocontroller/create/$1/$2';  // con esta ruta nos manda a la vista crear si le mandamos un cero , pero si le mandamos otro id nos devuelve los datos de ese pedido
+$route[$l.'pedidos/create']                 = 'Pedidocontroller/create_one';
+$route[$l.'pedidos/edit']                   = 'Pedidocontroller/edit_one';
+
+
+
+
+
 $route[$l.'inicio']                 		= 'Clientecontroller';
 $route[$l.'login']                 		= 'Logincontroller';
 

@@ -23,7 +23,7 @@
 		
 		<!-- Main CSS -->
         <link rel="stylesheet" href="<?php echo base_url(); ?>application/assets/admin/css/style.css">
-		
+		<script src="<?php echo base_url(); ?>application/assets/admin/js/jquery-3.4.1.js"></script>
 		<!--[if lt IE 9]>
 			<script src="<?php echo base_url(); ?>application/assets/admin/js/html5shiv.min.js"></script>
 			<script src="<?php echo base_url(); ?>application/assets/admin/js/respond.min.js"></script>
@@ -210,16 +210,151 @@
 			
                 <div class="content container-fluid">
 					
-                    <p>el codigo se pone aqui </p>
+					<p>el codigo se pone aqui </p>
+					
+					
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="card">
+								<div class="card-header">
+									<h4 class="card-title">FORMULARIO PEDIDO </h4>
+								</div>
+								<div class="card-body">
+									<form  id="formcreate">
+										<div class="form-group row">
+											<label class="col-form-label col-md-2">Descripcion </label>
+											<div class="col-md-10">
+												<input type="text" name="inp_descripcion" class="form-control" value="<?=@$onepedido->ped_descripcion ?>" >
+											</div>
+										</div>
+										<div class="form-group row">
+											<label class="col-form-label col-md-2">Fecha</label>
+											<div class="col-md-10">
+												<input type="date" name="inp_fecha" class="form-control" value="<?=@$oneproduct->pro_price ?>" >
+											</div>
+										</div>
+										<input type="hidden" name="url" id="url" value="<?=$url?>">
+                          				<input type="hidden" name="pedid" id="pedid" value="<?=@$onepedido->ped_id ?>">	
+							
+										<div class="form-group mb-0 row">
+											<label class="col-form-label col-md-2">Input Addons</label>
+											<div class="col-md-2">
+												<div class="input-group">
+												
+													<div class="input-group-append">
+														
+														<a  class="btn btn-primary" href="<?=$url?>pedidos"  >Listar</a>
+													</div>
+												</div>
+												
+											</div>
+											<div class="col-md-2">
+												<div class="input-group">
+												
+													<div class="input-group-append">
+														<button class="btn btn-primary" id="btnguardar" style="display:none" type="button">Crear</button>
+													</div>
+												</div>
+												
+											</div>
+											<div class="col-md-2">
+												<div class="input-group">
+												
+													<div class="input-group-append">
+														<button class="btn btn-primary" id="btneditar" style="display:none" type="button">Editar</button>
+													</div>
+												</div>
+												
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
 				</div>			
 			</div>
 			<!-- /Page Wrapper -->
+
+
+			<script>
+			     $("#btnguardar").click(
+                                   function () {
+                                            var datos=$("#formcreate").serialize();
+                                            var urlajax=$("#url").val()+"pedidos/create";   
+											   
+                                           $.ajax({                    
+                                                url: urlajax,
+                                                data: {datos},
+                                                type : 'POST',
+                                                dataType: "json",
+                                                beforeSend:function( ) {   
+                                                    $("#waitLoading").fadeIn(100);
+                                                },                    
+                                                success:function(response) {
+                                                    $("#waitLoading").fadeOut(1000);
+                                                    var dato = response; 
+                                                    window.location = $("#url").val()+"pedidos/"+dato;
+                                                    
+                                                },
+                                                error: function (data) {
+                                                    console.log(data);
+                                                },               
+                                                complete:function( ) {
+                                                    
+                                                },
+                                                }
+                                            );  
+											   
+                                                        
+                                            }); 
+
+
+
+
+											$("#btneditar").click(
+                                   function () {
+                                            var datos=$("#formcreate").serialize();
+                                            var urlajax=$("#url").val()+"pedidos/edit";        
+                                            
+                                            $.ajax({                    
+                                                url: urlajax,
+                                                data: {datos},
+                                                type : 'POST',
+                                                dataType: "json",
+                                                beforeSend:function( ) {   
+                                                    $("#waitLoading").fadeIn(100);
+                                                },                    
+                                                success:function(response) {
+                                                    $("#waitLoading").fadeOut(1000);
+                                                    
+                                                },
+                                                error: function (data) {
+                                                    console.log(data);
+                                                },               
+                                                complete:function( ) {
+                                                    
+                                                },
+                                                }
+                                            );      
+                                                        
+                                            }); 
+		var id=$("#pedid").val();
+        if(id==0){
+          $("#btnguardar").show();
+        }else{
+         
+          $("#btneditar").show();  
+                               
+        } 
+                                              
+
+			</script>
 		
         </div>
 		<!-- /Main Wrapper -->
 		
 		<!-- jQuery -->
-        <script src="<?php echo base_url(); ?>application/assets/admin/js/jquery-3.2.1.min.js"></script>
+		<script src="<?php echo base_url(); ?>application/assets/admin/js/jquery-3.4.1.js"></script>
+		
 		
 		<!-- Bootstrap Core JS -->
         <script src="<?php echo base_url(); ?>application/assets/admin/js/popper.min.js"></script>

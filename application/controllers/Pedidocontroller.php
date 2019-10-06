@@ -35,7 +35,7 @@ class Pedidocontroller extends CI_Controller {
 	public function index(){
 		$d = array();
 			$this->Msecurity->url_and_lan($d);
-			 $d["allpedido"]=$this->Mpedido->read_all_name();
+			 $d["allpedido"]=$this->Mpedido->read_all();
 			$this->load->view('pedido/index', $d);
 		}
 		/**/
@@ -72,17 +72,17 @@ class Pedidocontroller extends CI_Controller {
 
 		$d = array();
 		$this->Msecurity->url_and_lan($d);
-		$d['idfoto']= $id;  
-		$d['id']= $id; 
-		$d["allcateid"]=$this->Mpedido->read_all_category($id);
+
+		
 		
 		if($id==0){
+			echo "aqui esta entrando para guardar";
 		$this->load->view('pedido/create', $d);
 		}else{
 			$d["onepedido"]=$this->Mpedido->read_one($id);
-			$d["usuariocreador"] = $this->Muser->get_nombre($d["onepedido"]->user_id);
-			$d["usuarioeditor"] = $this->Muser->get_nombre($d["onepedido"]->user_id_update);
+			
 			$this->load->view('pedido/create', $d);
+			
 		}
 
 	}
